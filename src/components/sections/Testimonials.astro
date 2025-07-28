@@ -1,0 +1,179 @@
+---
+import Card from '../ui/Card.astro';
+import Button from '../ui/Button.astro';
+
+// Importar datos de testimonios
+import testimonialsData from '../../content/testimonials/testimonials.json';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  showStats?: boolean;
+  maxTestimonials?: number;
+  className?: string;
+}
+
+const {
+  title = "Empresas que ya confían en nuestra IA",
+  subtitle = "Descubrí qué dicen nuestros clientes sobre cómo nuestros chatbots transformaron sus negocios",
+  showStats = true,
+  maxTestimonials = 6,
+  className = ""
+} = Astro.props;
+
+// Obtener testimonios limitados
+const testimonials = testimonialsData.testimonials.slice(0, maxTestimonials);
+const stats = testimonialsData.stats;
+
+// Función para generar estrellas
+const generateStars = (rating: number) => {
+  return Array.from({ length: 5 }, (_, i) => 
+    i < rating ? '⭐' : '☆'
+  ).join('');
+};
+
+// Función para obtener iniciales del nombre
+const getInitials = (name: string) => {
+  return name.split(' ').map(n => n[0]).join('').toUpperCase();
+};
+---
+
+<section id="testimonials" class={`section-padding bg-neutral-50 ${className}`}>
+  <div class="container-custom">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-6">
+        <span class="w-2 h-2 bg-primary-500 rounded-full mr-2 animate-pulse"></span>
+        Testimonios Reales
+      </div>
+      
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-neutral-900">
+        {title}
+      </h2>
+      <p class="text-xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
+        {subtitle}
+      </p>
+    </div>
+
+    <!-- Stats Section -->
+    {showStats && (
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold text-primary-600 mb-2">
+            {stats.totalClients}+
+          </div>
+          <div class="text-neutral-600">Clientes Satisfechos</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold text-secondary-600 mb-2">
+            {stats.averageRating}
+          </div>
+          <div class="text-neutral-600">Rating Promedio</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold text-accent-600 mb-2">
+            {stats.satisfactionRate}%
+          </div>
+          <div class="text-neutral-600">Satisfacción</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold text-green-600 mb-2">
+            {stats.totalTestimonials}
+          </div>
+          <div class="text-neutral-600">Testimonios</div>
+        </div>
+      </div>
+    )}
+
+    <!-- Testimonials Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      {testimonials.map((testimonial) => (
+        <Card 
+          padding="lg" 
+          shadow="lg" 
+          className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+        >
+          <!-- Rating -->
+          <div class="flex items-center mb-4">
+            <div class="flex text-yellow-400 text-sm">
+              {generateStars(testimonial.rating)}
+            </div>
+            <span class="ml-2 text-sm text-neutral-500">
+              {testimonial.rating}/5
+            </span>
+          </div>
+
+          <!-- Testimonial Content -->
+          <blockquote class="text-neutral-700 leading-relaxed mb-6 italic">
+            "{testimonial.content}"
+          </blockquote>
+
+          <!-- Highlight -->
+          <div class="bg-primary-50 border-l-4 border-primary-500 p-4 mb-6 rounded-r-lg">
+            <div class="text-sm font-medium text-primary-700">
+              💡 Resultado destacado:
+            </div>
+            <div class="text-sm text-primary-600 mt-1">
+              {testimonial.highlight}
+            </div>
+          </div>
+
+          <!-- Author Info -->
+          <div class="flex items-center">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
+              {getInitials(testimonial.name)}
+            </div>
+            <div class="flex-1">
+              <div class="font-semibold text-neutral-900">
+                {testimonial.name}
+              </div>
+              <div class="text-sm text-neutral-600">
+                {testimonial.position}
+              </div>
+              <div class="text-sm text-primary-600 font-medium">
+                {testimonial.company}
+              </div>
+            </div>
+            <div class="text-xs text-neutral-400">
+              {new Date(testimonial.date).toLocaleDateString('es-AR', { 
+                month: 'short', 
+                year: 'numeric' 
+              })}
+            </div>
+          </div>
+
+          <!-- Industry Badge -->
+          <div class="mt-4">
+            <span class="inline-block bg-neutral-100 text-neutral-700 text-xs font-medium px-2 py-1 rounded-full">
+              {testimonial.industry}
+            </span>
+          </div>
+        </Card>
+      ))}
+    </div>
+
+    <!-- CTA Section -->
+    <div class="text-center">
+      <div class="bg-white rounded-2xl p-8 shadow-lg max-w-2xl mx-auto">
+        <h3 class="text-2xl font-bold mb-4 text-neutral-900">
+          ¿Querés ser el próximo caso de éxito?
+        </h3>
+        <p class="text-neutral-600 mb-6">
+          Unite a más de {stats.totalClients} empresas que ya confían en nuestros chatbots con IA
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button variant="primary" size="lg">
+            Empezar ahora
+          </Button>
+          <Button variant="outline" size="lg">
+            Ver más casos
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative Elements -->
+  <div class="absolute top-1/3 left-5 w-24 h-24 bg-primary-100 rounded-full opacity-20 blur-2xl"></div>
+  <div class="absolute bottom-1/3 right-5 w-32 h-32 bg-secondary-100 rounded-full opacity-20 blur-2xl"></div>
+</section> 

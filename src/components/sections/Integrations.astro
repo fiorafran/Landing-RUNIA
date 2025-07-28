@@ -1,0 +1,306 @@
+---
+import Card from '../ui/Card.astro';
+import Button from '../ui/Button.astro';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  integrations?: Array<{
+    id: string;
+    name: string;
+    description: string;
+    icon: string;
+    status: 'available' | 'coming-soon' | 'beta';
+    features?: string[];
+    color?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'info';
+    comingSoonDate?: string;
+  }>;
+  showCTA?: boolean;
+  ctaText?: string;
+  ctaLink?: string;
+  className?: string;
+}
+
+const {
+  title = "Integraciones Disponibles",
+  subtitle = "Nuestros bots funcionan directamente en el canal preferido de tus clientes, con la misma inteligencia en todas las plataformas",
+  integrations = [
+    {
+      id: "whatsapp",
+      name: "WhatsApp Business",
+      description: "Integración completa con WhatsApp Business para llegar a tus clientes donde están.",
+      icon: "📱",
+      status: "available",
+      color: "success",
+      features: [
+        "API oficial de WhatsApp Business",
+        "Mensajes multimedia (imágenes, videos, documentos)",
+        "Botones interactivos y listas",
+        "Respuestas automáticas 24/7",
+        "Integración con catálogo de productos"
+      ]
+    },
+    {
+      id: "telegram",
+      name: "Telegram",
+      description: "Ampliá tu alcance con la integración con Telegram, ideal para comunidades y grupos.",
+      icon: "💬",
+      status: "coming-soon",
+      color: "info",
+      comingSoonDate: "Q2 2024",
+      features: [
+        "Bots oficiales de Telegram",
+        "Comandos personalizados",
+        "Soporte para grupos y canales",
+        "Mensajes enriquecidos",
+        "Integración con webhooks"
+      ]
+    },
+    {
+      id: "webchat",
+      name: "Web Chat Widget",
+      description: "Widget de chat para tu sitio web con la misma inteligencia y personalización.",
+      icon: "🌐",
+      status: "coming-soon",
+      color: "primary",
+      comingSoonDate: "Q3 2024",
+      features: [
+        "Widget personalizable",
+        "Integración con tu sitio web",
+        "Chat en tiempo real",
+        "Historial de conversaciones",
+        "Analytics detallados"
+      ]
+    },
+    {
+      id: "instagram",
+      name: "Instagram Direct",
+      description: "Conectá con tu audiencia en Instagram a través de mensajes directos.",
+      icon: "📸",
+      status: "beta",
+      color: "accent",
+      features: [
+        "Mensajes directos de Instagram",
+        "Respuestas automáticas",
+        "Integración con stories",
+        "Gestión de comentarios",
+        "Métricas de engagement"
+      ]
+    },
+    {
+      id: "facebook",
+      name: "Facebook Messenger",
+      description: "Llegá a tus clientes en Facebook Messenger con respuestas inteligentes.",
+      icon: "📘",
+      status: "coming-soon",
+      color: "secondary",
+      comingSoonDate: "Q4 2024",
+      features: [
+        "Chat de Facebook Messenger",
+        "Respuestas automáticas",
+        "Integración con páginas de Facebook",
+        "Botones de acción rápida",
+        "Analytics de conversaciones"
+      ]
+    },
+    {
+      id: "api",
+      name: "API Personalizada",
+      description: "Integrá nuestro chatbot con tus sistemas existentes a través de APIs.",
+      icon: "🔌",
+      status: "available",
+      color: "warning",
+      features: [
+        "API REST completa",
+        "Webhooks personalizables",
+        "SDK para múltiples lenguajes",
+        "Documentación detallada",
+        "Soporte técnico especializado"
+      ]
+    }
+  ],
+  showCTA = true,
+  ctaText = "Ver todas las integraciones",
+  ctaLink = "#contact",
+  className = ""
+} = Astro.props;
+
+const statusConfig = {
+  available: {
+    label: "Disponible",
+    color: "bg-green-100 text-green-800",
+    icon: "✅"
+  },
+  "coming-soon": {
+    label: "Próximamente",
+    color: "bg-blue-100 text-blue-800",
+    icon: "🚀"
+  },
+  beta: {
+    label: "Beta",
+    color: "bg-yellow-100 text-yellow-800",
+    icon: "🧪"
+  }
+};
+
+const colorClasses = {
+  primary: "bg-primary-100 text-primary-600",
+  secondary: "bg-secondary-100 text-secondary-600",
+  accent: "bg-accent-100 text-accent-600",
+  success: "bg-green-100 text-green-600",
+  warning: "bg-yellow-100 text-yellow-600",
+  info: "bg-blue-100 text-blue-600"
+};
+---
+
+<section id="integrations" class={`section-padding bg-white ${className}`}>
+  <div class="container-custom">
+    <!-- Section Header -->
+    <div class="text-center mb-20">
+      <div class="inline-flex items-center px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-6">
+        <span class="w-2 h-2 bg-primary-500 rounded-full mr-2 animate-pulse"></span>
+        Plataformas Soportadas
+      </div>
+      
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 text-neutral-900">
+        {title}
+      </h2>
+      <p class="text-xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
+        {subtitle}
+      </p>
+    </div>
+
+    <!-- Integrations Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      {integrations.map((integration) => (
+        <div class="group relative">
+          <!-- Background Gradient on Hover -->
+          <div class="absolute inset-0 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl scale-95 group-hover:scale-100"></div>
+          
+          <Card 
+            padding="lg" 
+            shadow="lg" 
+            className="relative text-center group-hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/95 backdrop-blur-sm"
+          >
+            <!-- Icon -->
+            <div class="relative mb-6">
+              <div class={`w-20 h-20 ${colorClasses[integration.color || 'primary']} rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
+                <span class="text-3xl group-hover:scale-110 transition-transform duration-300">{integration.icon}</span>
+              </div>
+              
+              <!-- Status Badge -->
+              <div class="absolute -top-2 -right-2">
+                <span class={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${statusConfig[integration.status].color}`}>
+                  <span class="mr-1">{statusConfig[integration.status].icon}</span>
+                  {statusConfig[integration.status].label}
+                </span>
+              </div>
+            </div>
+            
+            <!-- Content -->
+            <h3 class="text-xl font-bold mb-4 text-neutral-900 group-hover:text-primary-600 transition-colors duration-300">
+              {integration.name}
+            </h3>
+            
+            <p class="text-neutral-600 leading-relaxed mb-6 group-hover:text-neutral-700 transition-colors duration-300">
+              {integration.description}
+            </p>
+
+            <!-- Coming Soon Date -->
+            {integration.comingSoonDate && (
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-6">
+                <div class="text-sm font-medium text-blue-700">
+                  Disponible: {integration.comingSoonDate}
+                </div>
+              </div>
+            )}
+
+            <!-- Features List -->
+            {integration.features && integration.features.length > 0 && (
+              <div class="mb-6">
+                <ul class="text-left space-y-2">
+                  {integration.features.slice(0, 3).map((feature) => (
+                    <li class="flex items-center text-sm text-neutral-600 group-hover:text-neutral-700 transition-colors duration-300">
+                      <div class="w-1.5 h-1.5 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full mr-3 flex-shrink-0 group-hover:scale-125 transition-transform duration-300"></div>
+                      <span class="group-hover:translate-x-1 transition-transform duration-300">{feature}</span>
+                    </li>
+                  ))}
+                  {integration.features.length > 3 && (
+                    <li class="text-sm text-neutral-500 italic">
+                      +{integration.features.length - 3} características más
+                    </li>
+                  )}
+                </ul>
+              </div>
+            )}
+
+            <!-- Action Button -->
+            <Button 
+              variant={integration.status === 'available' ? 'primary' : 'outline'}
+              size="sm" 
+              className="w-full group-hover:bg-gradient-to-r group-hover:from-primary-500 group-hover:to-secondary-500 group-hover:text-white group-hover:border-transparent transition-all duration-300 transform group-hover:scale-105"
+              disabled={integration.status === 'coming-soon'}
+            >
+              {integration.status === 'available' ? 'Configurar' : 
+               integration.status === 'beta' ? 'Solicitar acceso' : 'Notificar cuando esté disponible'}
+            </Button>
+          </Card>
+        </div>
+      ))}
+    </div>
+
+    <!-- Integration Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
+      <div class="text-center">
+        <div class="text-3xl md:text-4xl font-bold text-primary-600 mb-2">
+          {integrations.filter(i => i.status === 'available').length}
+        </div>
+        <div class="text-neutral-600">Integraciones Activas</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl md:text-4xl font-bold text-secondary-600 mb-2">
+          {integrations.filter(i => i.status === 'coming-soon').length}
+        </div>
+        <div class="text-neutral-600">Próximamente</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl md:text-4xl font-bold text-accent-600 mb-2">
+          99.9%
+        </div>
+        <div class="text-neutral-600">Tiempo de Actividad</div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl md:text-4xl font-bold text-green-600 mb-2">
+          &lt; 1s
+        </div>
+        <div class="text-neutral-600">Tiempo de Respuesta</div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    {showCTA && (
+      <div class="text-center">
+        <div class="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-2xl p-8 max-w-3xl mx-auto">
+          <h3 class="text-2xl font-bold mb-4 text-neutral-900">
+            ¿No encontrás tu plataforma?
+          </h3>
+          <p class="text-neutral-600 mb-6">
+            Trabajamos constantemente para agregar nuevas integraciones. Si necesitás una plataforma específica, contactanos y la desarrollamos para vos.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button variant="primary" size="lg" href={ctaLink}>
+              {ctaText}
+            </Button>
+            <Button variant="outline" size="lg">
+              Solicitar nueva integración
+            </Button>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+
+  <!-- Decorative Elements -->
+  <div class="absolute top-1/4 left-10 w-32 h-32 bg-primary-100 rounded-full opacity-20 blur-3xl"></div>
+  <div class="absolute bottom-1/4 right-10 w-40 h-40 bg-secondary-100 rounded-full opacity-20 blur-3xl"></div>
+</section> 

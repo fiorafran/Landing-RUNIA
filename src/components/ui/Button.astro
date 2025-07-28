@@ -1,0 +1,66 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  href?: string;
+  target?: string;
+  rel?: string;
+  className?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  type = 'button',
+  disabled = false,
+  href,
+  target,
+  rel,
+  className = '',
+} = Astro.props;
+
+// Clases base del botón
+const baseClasses = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg';
+
+// Clases por variante
+const variantClasses = {
+  primary: 'bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5',
+  secondary: 'bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-secondary-500 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5',
+  outline: 'border-2 border-primary-500 text-primary-600 hover:bg-primary-500 hover:text-white focus:ring-primary-500'
+};
+
+// Clases por tamaño
+const sizeClasses = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-base',
+  lg: 'px-8 py-4 text-lg'
+};
+
+// Clases de estado
+const stateClasses = disabled ? 'opacity-50 cursor-not-allowed transform-none' : '';
+
+// Clases finales
+const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${stateClasses} ${className}`;
+---
+
+{href ? (
+  <a 
+    href={href}
+    target={target}
+    rel={rel}
+    class={buttonClasses}
+    aria-disabled={disabled}
+  >
+    <slot />
+  </a>
+) : (
+  <button 
+    type={type}
+    disabled={disabled}
+    class={buttonClasses}
+  >
+    <slot />
+  </button>
+)} 

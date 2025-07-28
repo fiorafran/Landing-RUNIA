@@ -1,0 +1,49 @@
+---
+export interface Props {
+  padding?: 'sm' | 'md' | 'lg' | 'xl';
+  shadow?: 'sm' | 'md' | 'lg' | 'xl';
+  hover?: boolean;
+  border?: boolean;
+  className?: string;
+}
+
+const {
+  padding = 'md',
+  shadow = 'md',
+  hover = true,
+  border = false,
+  className = '',
+} = Astro.props;
+
+// Clases base de la tarjeta
+const baseClasses = 'bg-white rounded-xl transition-all duration-300';
+
+// Clases por padding
+const paddingClasses = {
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8',
+  xl: 'p-10'
+};
+
+// Clases por sombra
+const shadowClasses = {
+  sm: 'shadow-sm',
+  md: 'shadow-lg',
+  lg: 'shadow-xl',
+  xl: 'shadow-2xl'
+};
+
+// Clases de hover
+const hoverClasses = hover ? 'hover:shadow-xl hover:-translate-y-1' : '';
+
+// Clases de borde
+const borderClasses = border ? 'border border-neutral-200' : '';
+
+// Clases finales
+const cardClasses = `${baseClasses} ${paddingClasses[padding]} ${shadowClasses[shadow]} ${hoverClasses} ${borderClasses} ${className}`;
+---
+
+<div class={cardClasses}>
+  <slot />
+</div> 

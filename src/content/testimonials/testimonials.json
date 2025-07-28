@@ -1,0 +1,83 @@
+{
+  "testimonials": [
+    {
+      "id": "testimonial-1",
+      "name": "María González",
+      "position": "CEO",
+      "company": "TechStart Argentina",
+      "avatar": "/images/avatars/maria-gonzalez.jpg",
+      "rating": 5,
+      "content": "Implementamos el chatbot hace 3 meses y ya vemos resultados increíbles. Nuestro tiempo de respuesta pasó de 2 horas a menos de 1 minuto. Los clientes están súper satisfechos y hemos reducido costos en un 70%.",
+      "highlight": "Tiempo de respuesta de 2 horas a menos de 1 minuto",
+      "industry": "Tecnología",
+      "date": "2024-01-15"
+    },
+    {
+      "id": "testimonial-2",
+      "name": "Carlos Rodríguez",
+      "position": "Director de Operaciones",
+      "company": "E-commerce Express",
+      "avatar": "/images/avatars/carlos-rodriguez.jpg",
+      "rating": 5,
+      "content": "El chatbot revolucionó nuestra atención al cliente. Atendemos 10 veces más consultas sin aumentar el personal. La integración con WhatsApp fue súper fácil y nuestros clientes no notan la diferencia con un humano.",
+      "highlight": "10 veces más consultas sin aumentar personal",
+      "industry": "E-commerce",
+      "date": "2024-01-10"
+    },
+    {
+      "id": "testimonial-3",
+      "name": "Ana Martínez",
+      "position": "Gerente de Marketing",
+      "company": "Restaurante La Esquina",
+      "avatar": "/images/avatars/ana-martinez.jpg",
+      "rating": 5,
+      "content": "Increíble cómo el chatbot maneja nuestras reservas y consultas de menú. Los clientes pueden hacer pedidos 24/7 y nosotros nos enfocamos en la cocina. La inversión se pagó sola en el primer mes.",
+      "highlight": "Inversión recuperada en el primer mes",
+      "industry": "Gastronomía",
+      "date": "2024-01-05"
+    },
+    {
+      "id": "testimonial-4",
+      "name": "Roberto Silva",
+      "position": "Fundador",
+      "company": "Consultora Digital Pro",
+      "avatar": "/images/avatars/roberto-silva.jpg",
+      "rating": 5,
+      "content": "Como consultora, necesitábamos una solución profesional que reflejara nuestra calidad. El chatbot no solo atiende consultas básicas, sino que también agenda reuniones y califica leads automáticamente.",
+      "highlight": "Calificación automática de leads",
+      "industry": "Consultoría",
+      "date": "2023-12-28"
+    },
+    {
+      "id": "testimonial-5",
+      "name": "Laura Fernández",
+      "position": "Directora Comercial",
+      "company": "Clínica Salud Integral",
+      "avatar": "/images/avatars/laura-fernandez.jpg",
+      "rating": 5,
+      "content": "En el sector salud, la confianza es crucial. El chatbot maneja consultas médicas básicas con total profesionalismo y deriva casos complejos a nuestros especialistas. Los pacientes están muy satisfechos.",
+      "highlight": "Manejo profesional de consultas médicas",
+      "industry": "Salud",
+      "date": "2023-12-20"
+    },
+    {
+      "id": "testimonial-6",
+      "name": "Diego Morales",
+      "position": "CEO",
+      "company": "Inmobiliaria Capital",
+      "avatar": "/images/avatars/diego-morales.jpg",
+      "rating": 5,
+      "content": "El chatbot nos permite atender consultas de propiedades 24/7. Los clientes pueden ver fotos, precios y agendar visitas sin esperar. Hemos aumentado nuestras ventas en un 40% desde la implementación.",
+      "highlight": "40% de aumento en ventas",
+      "industry": "Inmobiliaria",
+      "date": "2023-12-15"
+    }
+  ],
+  "stats": {
+    "totalTestimonials": 6,
+    "averageRating": 5.0,
+    "industries": ["Tecnología", "E-commerce", "Gastronomía", "Consultoría", "Salud", "Inmobiliaria"],
+    "totalClients": 150,
+    "satisfactionRate": 98
+  }
+} 
