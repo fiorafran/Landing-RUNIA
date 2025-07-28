@@ -20,6 +20,7 @@ const {
 } = Astro.props;
 
 const canonicalUrl = canonical || Astro.url.href;
+import '../../styles/global.css';
 ---
 
 <!DOCTYPE html>
@@ -72,7 +73,7 @@ const canonicalUrl = canonical || Astro.url.href;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <!-- Importar estilos globales -->
-    <link rel="stylesheet" href="/src/styles/global.css" />
+    <!-- <link rel="stylesheet" href="/src/styles/global.css" /> -->
     
     <!-- Structured Data -->
     <script type="application/ld+json">
