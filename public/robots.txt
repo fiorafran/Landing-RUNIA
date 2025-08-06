@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://chatbotsia.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /_astro/
+
+# Allow important pages
+Allow: /
+Allow: /contacto
+Allow: /servicios
+Allow: /nosotros 

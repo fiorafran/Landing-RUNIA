@@ -1,0 +1,200 @@
+---
+// Componente para tracking de eventos personalizados
+---
+
+<script>
+  // Sistema de tracking de eventos personalizado
+  class EventTracker {
+    constructor() {
+      this.events = [];
+      this.startTime = Date.now();
+      this.init();
+    }
+
+    init() {
+      this.trackPageView();
+      this.trackScrollDepth();
+      this.trackTimeOnPage();
+      this.trackFormInteractions();
+      this.trackButtonClicks();
+      this.trackExternalLinks();
+    }
+
+    // Tracking de vista de página
+    trackPageView() {
+      const pageData = {
+        event: 'page_view',
+        page: window.location.pathname,
+        title: document.title,
+        referrer: document.referrer,
+        timestamp: new Date().toISOString()
+      };
+      
+      this.sendEvent(pageData);
+    }
+
+    // Tracking de profundidad de scroll
+    trackScrollDepth() {
+      let maxScroll = 0;
+      const scrollThresholds = [25, 50, 75, 90];
+      const trackedThresholds = new Set();
+
+      window.addEventListener('scroll', () => {
+        const scrollPercent = Math.round(
+          (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+        );
+
+        if (scrollPercent > maxScroll) {
+          maxScroll = scrollPercent;
+        }
+
+        // Track thresholds
+        scrollThresholds.forEach(threshold => {
+          if (scrollPercent >= threshold && !trackedThresholds.has(threshold)) {
+            trackedThresholds.add(threshold);
+            this.sendEvent({
+              event: 'scroll_depth',
+              depth: threshold,
+              page: window.location.pathname,
+              timestamp: new Date().toISOString()
+            });
+          }
+        });
+      });
+    }
+
+    // Tracking de tiempo en página
+    trackTimeOnPage() {
+      let timeOnPage = 0;
+      
+      setInterval(() => {
+        timeOnPage += 1;
+        
+        // Track cada 30 segundos
+        if (timeOnPage % 30 === 0) {
+          this.sendEvent({
+            event: 'time_on_page',
+            seconds: timeOnPage,
+            page: window.location.pathname,
+            timestamp: new Date().toISOString()
+          });
+        }
+      }, 1000);
+
+      // Track al salir de la página
+      window.addEventListener('beforeunload', () => {
+        this.sendEvent({
+          event: 'page_exit',
+          time_on_page: timeOnPage,
+          page: window.location.pathname,
+          timestamp: new Date().toISOString()
+        });
+      });
+    }
+
+    // Tracking de interacciones con formularios
+    trackFormInteractions() {
+      const forms = document.querySelectorAll('form');
+      
+      forms.forEach(form => {
+        // Track inicio de llenado
+        form.addEventListener('focusin', (e) => {
+          const target = e.target;
+          if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT')) {
+            this.sendEvent({
+              event: 'form_field_focus',
+              form_id: form.id || 'contact_form',
+              field_name: target.name,
+              field_type: target.type,
+              page: window.location.pathname,
+              timestamp: new Date().toISOString()
+            });
+          }
+        });
+
+        // Track envío de formulario
+        form.addEventListener('submit', (e) => {
+          const formData = new FormData(form);
+          const serviceType = formData.get('service') || 'general';
+          
+          this.sendEvent({
+            event: 'form_submit',
+            form_id: form.id || 'contact_form',
+            service_type: serviceType,
+            page: window.location.pathname,
+            timestamp: new Date().toISOString()
+          });
+        });
+      });
+    }
+
+    // Tracking de clicks en botones
+    trackButtonClicks() {
+      document.addEventListener('click', (e) => {
+        const button = e.target.closest('button, a[href], .btn');
+        
+        if (button) {
+          const buttonText = button.textContent?.trim() || '';
+          const buttonHref = button.href || '';
+          const buttonClass = button.className || '';
+          
+          this.sendEvent({
+            event: 'button_click',
+            button_text: buttonText,
+            button_href: buttonHref,
+            button_class: buttonClass,
+            page: window.location.pathname,
+            timestamp: new Date().toISOString()
+          });
+        }
+      });
+    }
+
+    // Tracking de enlaces externos
+    trackExternalLinks() {
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href]');
+        
+        if (link && link.hostname !== window.location.hostname) {
+          this.sendEvent({
+            event: 'external_link_click',
+            link_url: link.href,
+            link_text: link.textContent?.trim() || '',
+            page: window.location.pathname,
+            timestamp: new Date().toISOString()
+          });
+        }
+      });
+    }
+
+    // Enviar evento
+    sendEvent(eventData) {
+      // Guardar en localStorage para análisis posterior
+      this.events.push(eventData);
+      localStorage.setItem('event_tracker_events', JSON.stringify(this.events));
+
+      // Log en desarrollo
+      console.log('Event tracked:', eventData);
+    }
+
+    // Obtener eventos guardados
+    getEvents() {
+      return this.events;
+    }
+
+    // Limpiar eventos
+    clearEvents() {
+      this.events = [];
+      localStorage.removeItem('event_tracker_events');
+    }
+  }
+
+  // Inicializar tracker cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new EventTracker();
+    });
+  } else {
+    new EventTracker();
+  }
+</script> 

@@ -7,13 +7,39 @@ import Solutions from '../components/sections/Solutions.astro';
 import WhyChooseUs from '../components/sections/WhyChooseUs.astro';
 import Integrations from '../components/sections/Integrations.astro';
 import CTA from '../components/sections/CTA.astro';
+import Contact from '../components/sections/Contact.astro';
+import Footer from '../components/sections/Footer.astro';
 import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
+
+// SEO optimized content
+const seoData = {
+  title: "Chatbots IA - Automatización Inteligente para WhatsApp Business",
+  description: "Creamos chatbots con inteligencia artificial que automatizan tus procesos, reducen costos y escalan tu atención al cliente sin esfuerzo. Especialistas en WhatsApp Business API.",
+  keywords: [
+    "chatbots",
+    "inteligencia artificial", 
+    "automatización",
+    "whatsapp business",
+    "atención al cliente",
+    "IA",
+    "chatbot whatsapp",
+    "automatización procesos",
+    "argentina",
+    "buenos aires"
+  ],
+  image: "/images/og-chatbots-ia.jpg",
+  canonical: "/"
+};
 ---
 
 <BaseLayout 
-  title="Chatbots IA - Automatización Inteligente"
-  description="Creamos chatbots con IA que automatizan tus procesos, reducen costos y escalan tu atención al cliente sin esfuerzo."
+  title={seoData.title}
+  description={seoData.description}
+  image={seoData.image}
+  canonical={seoData.canonical}
+  type="website"
+  tags={seoData.keywords}
 >
   <!-- Header -->
   <Header />
@@ -32,4 +58,10 @@ import Card from '../components/ui/Card.astro';
 
   <!-- CTA Section -->
   <CTA />
+
+  <!-- Contact Section -->
+  <Contact />
+
+  <!-- Footer -->
+  <Footer />
 </BaseLayout>

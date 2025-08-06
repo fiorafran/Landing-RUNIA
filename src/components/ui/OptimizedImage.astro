@@ -1,0 +1,40 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  className?: string;
+  priority?: boolean;
+}
+
+const { src, alt, width, height, className = "", priority = false } = Astro.props;
+---
+
+<picture>
+  <!-- WebP format for modern browsers -->
+  <source 
+    type="image/webp" 
+    srcset={`${src}?format=webp&w=${width || 800}`}
+  />
+  
+  <!-- Fallback for older browsers -->
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    class={className}
+    loading={priority ? "eager" : "lazy"}
+    decoding="async"
+    style={width && height ? `aspect-ratio: ${width}/${height}` : ""}
+  />
+</picture>
+
+<style>
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style> 

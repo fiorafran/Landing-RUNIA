@@ -1,0 +1,85 @@
+---
+export interface Props {
+  measurementId?: string;
+  debugMode?: boolean;
+}
+
+const { 
+  measurementId = 'G-XXXXXXXXXX', // Reemplazar con tu ID real
+  debugMode = false 
+} = Astro.props;
+---
+
+<!-- Google Analytics -->
+<script type="text/partytown" async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}></script>
+<script type="text/partytown" define:vars={{ measurementId, debugMode }}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', measurementId, {
+    page_title: document.title,
+    page_location: window.location.href,
+    debug_mode: debugMode,
+    // Configuraciones adicionales
+    anonymize_ip: true,
+    allow_google_signals: false,
+    allow_ad_personalization_signals: false,
+    // Eventos personalizados
+    custom_map: {
+      'custom_parameter_1': 'chatbot_interest',
+      'custom_parameter_2': 'service_type',
+      'custom_parameter_3': 'contact_method'
+    }
+  });
+
+  // Eventos personalizados para tracking
+  window.trackEvent = function(eventName, parameters = {}) {
+    gtag('event', eventName, {
+      event_category: 'engagement',
+      event_label: window.location.pathname,
+      ...parameters
+    });
+  };
+
+  // Tracking de formulario de contacto
+  window.trackContactForm = function(serviceType) {
+    gtag('event', 'contact_form_submit', {
+      event_category: 'lead_generation',
+      event_label: serviceType,
+      value: 1
+    });
+  };
+
+  // Tracking de scroll
+  window.trackScroll = function(depth) {
+    gtag('event', 'scroll', {
+      event_category: 'engagement',
+      event_label: `scroll_depth_${depth}`,
+      value: depth
+    });
+  };
+
+  // Tracking de tiempo en página
+  window.trackTimeOnPage = function(seconds) {
+    gtag('event', 'time_on_page', {
+      event_category: 'engagement',
+      event_label: window.location.pathname,
+      value: Math.round(seconds)
+    });
+  };
+</script>
+
+<!-- Google Tag Manager (opcional) -->
+<script type="text/partytown" define:vars={{ measurementId }}>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer', measurementId);
+</script>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe src={`https://www.googletagmanager.com/ns.html?id=${measurementId}`}
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript> 

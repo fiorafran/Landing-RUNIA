@@ -52,6 +52,7 @@ const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[s
     rel={rel}
     class={buttonClasses}
     aria-disabled={disabled}
+    data-smooth-scroll={href.startsWith('#') ? 'true' : 'false'}
   >
     <slot />
   </a>
@@ -63,4 +64,30 @@ const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[s
   >
     <slot />
   </button>
-)} 
+)}
+
+<script>
+  // Smooth scroll para enlaces internos
+  document.addEventListener('DOMContentLoaded', () => {
+    const smoothScrollLinks = document.querySelectorAll('[data-smooth-scroll="true"]');
+    
+    smoothScrollLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const targetId = href.substring(1);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+      });
+    });
+  });
+</script> 

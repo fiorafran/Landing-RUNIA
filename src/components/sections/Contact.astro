@@ -1,0 +1,129 @@
+---
+// Contact Section Component
+// Integra el formulario de contacto con diseño de sección
+import ContactForm from '../react/ContactForm';
+---
+
+<section id="contact" class="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+  <!-- Patrón de fondo -->
+  <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23000000" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
+  
+  <!-- Elementos decorativos -->
+  <div class="absolute top-20 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
+  
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header de la sección -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-6">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+        </svg>
+        Contacto
+      </div>
+      
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        ¿Listo para automatizar tu negocio?
+      </h2>
+      
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Cuéntanos sobre tu proyecto y nuestro equipo de expertos en IA te ayudará a crear 
+        la solución perfecta para automatizar tus procesos y escalar tu atención al cliente.
+      </p>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      
+      <!-- Información de contacto -->
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">
+            Información de contacto
+          </h3>
+          <p class="text-gray-600 mb-8 leading-relaxed">
+            Estamos aquí para ayudarte a transformar tu negocio con inteligencia artificial. 
+            Nuestro equipo de expertos está listo para responder todas tus preguntas y 
+            crear la solución perfecta para tus necesidades.
+          </p>
+        </div>
+
+        <!-- Detalles de contacto -->
+        <div class="space-y-6">
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 mb-1">Email</h4>
+              <p class="text-gray-600">contacto@chatbotsia.com</p>
+              <p class="text-sm text-gray-500">Respuesta en menos de 24 horas</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 mb-1">Teléfono</h4>
+              <p class="text-gray-600">+54 11 1234-5678</p>
+              <p class="text-sm text-gray-500">Lun a Vie, 9:00 - 18:00</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 mb-1">Ubicación</h4>
+              <p class="text-gray-600">Buenos Aires, Argentina</p>
+              <p class="text-sm text-gray-500">Servicios en toda Latinoamérica</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Beneficios adicionales -->
+        <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-100">
+          <h4 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+            <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            ¿Por qué elegirnos?
+          </h4>
+          <ul class="space-y-3 text-sm text-gray-600">
+            <li class="flex items-center">
+              <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+              Consulta gratuita sin compromiso
+            </li>
+            <li class="flex items-center">
+              <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+              Implementación en menos de 2 semanas
+            </li>
+            <li class="flex items-center">
+              <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+              Soporte técnico 24/7
+            </li>
+            <li class="flex items-center">
+              <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+              Garantía de satisfacción del 100%
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Formulario de contacto -->
+      <div class="lg:pl-8">
+        <ContactForm client:load />
+      </div>
+    </div>
+  </div>
+</section> 
